@@ -78,7 +78,7 @@ export function TaskCard({ task }: TaskCardProps) {
           <div>
             <h4 className="font-semibold text-slate-800 mb-2 flex items-center">
               <User className="w-4 h-4 mr-2" />
-              Descripción
+              Descripción 2
             </h4>
             <p className="text-slate-600 leading-relaxed">{task.description}</p>
           </div>
