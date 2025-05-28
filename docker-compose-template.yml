@@ -32,7 +32,12 @@ services:
       - PORT=3001
       - JIRA_URL=<url>
       - JIRA_EMAIL=<you email>
-      - JIRA_TOKEN=<yout token>
+      - JIRA_TOKEN=<your token>
+      # NAUTILUS PROPS
+      - NAUTILUS_AUTH_URL=h<nautilus auth url>
+      - NAUTILUS_API_URL=<nautilus api url>
+      - NAUTILUS_BASIC_TOKEN=<nautilus basic token>
+      - NAUTILUS_TENANT=<nautilus tenant>
     networks:
       - app-network
 
