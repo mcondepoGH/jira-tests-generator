@@ -70,7 +70,7 @@ function extractDescription(content) {
 
 function extractAcceptanceCriteria(content) {
   //TODO : Implementar lógica para extraer los criterios de aceptación del contenido
-  return content
+  return []
 }
 
 // Health check endpoint
