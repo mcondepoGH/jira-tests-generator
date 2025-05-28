@@ -10,7 +10,14 @@ export const extractFilenamesFromHtml = (html) => {
   for (const regex of regexList) {
     let match
     while ((match = regex.exec(html)) !== null) {
-      const fullPath = match[1]
+      let fullPath
+
+      try {
+        fullPath = decodeURIComponent(match[1])
+      } catch {
+        fullPath = match[1]
+      }
+
       const filename = fullPath.split('|')[0].split('?')[0].split('/').pop()
       if (filename) filenames.add(filename)
     }
