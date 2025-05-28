@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 
-const NAUTILUS_AUTH_URL = process.env.NAUTILUS_AUTH_TOKEN
+const NAUTILUS_AUTH_URL = process.env.NAUTILUS_AUTH_URL
 const NAUTILUS_API_URL = process.env.NAUTILUS_API_URL
 const NAUTILUS_NAUTILUS_TENANT = process.env.NAUTILUS_TENANT
 const NAUTILUS_BASIC_TOKEN = process.env.NAUTILUS_BASIC_TOKEN
