@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:8080"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:3001
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+      - "9229:9229"
+    command: node --inspect=0.0.0.0:9229 server.js
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - PORT=3001
+      - JIRA_URL=<url>
+      - JIRA_EMAIL=<you email>
+      - JIRA_TOKEN=<yout token>
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
