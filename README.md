@@ -60,6 +60,7 @@ npm run dev
 ### Backend
 - `JIRA_URL`: URL de tu instancia de Jira
 - `JIRA_TOKEN`: Token de autenticación de Jira
+- `JIRA_EMAIL`: Email de usuario de Jira
 - `PORT`: Puerto del servidor (por defecto 3001)
 
 ### Frontend
