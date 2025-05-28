@@ -15,6 +15,7 @@ app.use(express.json());
 
 // Configuración de Jira
 const JIRA_URL = process.env.JIRA_URL;
+const JIRA_EMAIL = process.env.JIRA_EMAIL;
 const JIRA_TOKEN = process.env.JIRA_TOKEN;
 
 // Endpoint para obtener tarea de Jira

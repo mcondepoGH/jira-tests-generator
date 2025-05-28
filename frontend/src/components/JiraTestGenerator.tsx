@@ -7,7 +7,7 @@ import {Badge} from "@/components/ui/badge";
 import {Loader2, ExternalLink, Download, Copy, CheckCircle} from "lucide-react";
 import {TaskCard} from "./TaskCard";
 import {TestGenerator} from "./TestGenerator";
-import {useToast} from "../hooks/use-toast";
+import {useToast} from "@/hooks/use-toast";
 
 interface JiraTask {
     key: string;
