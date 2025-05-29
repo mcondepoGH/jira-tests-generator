@@ -1,8 +1,9 @@
-
+import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { User, Calendar, Flag, CheckSquare } from "lucide-react";
+import { User, Flag, CheckSquare } from "lucide-react";
+import parse, { domToReact } from 'html-react-parser';
 
 interface JiraTask {
   key: string;
@@ -37,6 +38,35 @@ export function TaskCard({ task }: TaskCardProps) {
     }
   };
 
+	const formatHtml = (content: string) => {
+		const styleMap: Record<string, string> = {
+			h1: 'text-2xl font-semibold text-gray-900 mb-2',
+			h2: 'text-xl font-medium text-gray-900 mb-2',
+			p: 'text-md text-gray-700 leading-relaxed mb-2',
+			ul: 'text-md list-disc list-inside ml-4 mb-2',
+			li: 'text-md text-gray-700 mb-1',
+			strong: 'font-semibold text-gray-900',
+			a: 'text-blue-600 hover:underline cursor-pointer',
+			code: 'mx-1'
+		}
+
+		const options = {
+			replace: (domNode: any) => {
+				if (domNode.type === 'tag' && styleMap[domNode.name]) {
+					const Tag = domNode.name as keyof React.JSX.IntrinsicElements
+					return (
+						<Tag className={styleMap[Tag]}>
+							{domToReact(domNode.children, options)}
+						</Tag>
+					)
+				}
+			}
+		}
+
+		return parse(content, options)
+	}
+
+
   return (
     <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
       <CardHeader className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white rounded-t-lg">
@@ -58,7 +88,7 @@ export function TaskCard({ task }: TaskCardProps) {
           </div>
         </div>
       </CardHeader>
-      
+
       <CardContent className="p-6">
         <div className="space-y-6">
           {/* Assignee */}
@@ -80,7 +110,9 @@ export function TaskCard({ task }: TaskCardProps) {
               <User className="w-4 h-4 mr-2" />
               Descripción
             </h4>
-            <p className="text-slate-600 leading-relaxed">{task.description}</p>
+            <div className="text-slate-600 leading-relaxed">
+              {formatHtml(task.description)}
+            </div>
           </div>
 
           {/* Acceptance Criteria */}

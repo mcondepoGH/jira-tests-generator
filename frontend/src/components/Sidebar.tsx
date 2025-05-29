@@ -26,7 +26,7 @@ export function Sidebar() {
   const { state } = useSidebar();
 
   return (
-    <SidebarComponent className={state === 'collapsed' ? "w-14" : "w-64"}>
+    <SidebarComponent className={state === 'collapsed' ? "w-14" : "w-64"} collapsible='icon'>
       <SidebarTrigger className="m-2 self-end" />
       
       <SidebarContent className="bg-white border-r border-slate-200">
