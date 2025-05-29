@@ -1,6 +1,7 @@
 import { extractFilenamesFromHtml } from './parser.js'
-import { fetchAttachmentAsDataUri } from './attachmentService.js'
+import { fetchAttachment } from '../service/attachmentService.js'
 import { replaceImagesWithEmbedded } from './replacer.js'
+import { imgToBase64 } from './util.js'
 
 export const parseJiraAttachments = async (html, attachments) => {
   const filenames = extractFilenamesFromHtml(html)
@@ -9,7 +10,8 @@ export const parseJiraAttachments = async (html, attachments) => {
   for (const filename of filenames) {
     const attachment = attachments.find(att => att.filename === filename)
     if (attachment) {
-      const dataUri = await fetchAttachmentAsDataUri(attachment.id, attachment.mimeType)
+      const dataImg = await fetchAttachment(attachment.id)
+      const dataUri = await imgToBase64(dataImg, attachment.mimeType)
       fileMap.set(filename, dataUri)
     }
   }

@@ -1,9 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { extractDescription } from './Jira/content/contentUtils.js'
-import { getAcceptanceCriteria } from './Nautilus/service/aiServices.js'
-import { getJiraIssue } from './Jira/service/jiraServices.js'
+import { extractDescription } from './Jira/content/util.js'
+import { getAcceptanceCriteria } from './Nautilus/service/aiService.js'
+import { fetchIssue } from './Jira/service/issueService.js'
 
 dotenv.config()
 
@@ -21,7 +21,7 @@ app.get('/api/jira/task/:taskKey', async (req, res) => {
   console.debug(`Fetching task from Jira: ${taskKey}`)
 
   try {
-    const response = await getJiraIssue(taskKey)
+    const response = await fetchIssue(taskKey)
 
     if (!response.ok) {
       throw new Error(`Jira API error: ${response.status} ${response.statusText}`)

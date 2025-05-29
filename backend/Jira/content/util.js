@@ -10,7 +10,7 @@ export const extractDescription = async (data) => {
   return contentHtml
 }
 
-function removeParagraphFromLi (htmlString) {
+const removeParagraphFromLi = (htmlString) => {
   const dom = new JSDOM(htmlString)
   const document = dom.window.document
   const listItems = document.querySelectorAll('li')
@@ -32,7 +32,7 @@ function removeParagraphFromLi (htmlString) {
   return document.body.innerHTML
 }
 
-function replaceCustomPanels (input) {
+const replaceCustomPanels = (input) => {
   input = input.replace(
     /<p>\s*(\{panel(:[^}]*)?}[\s\S]*?\{panel})\s*<\/p>/g,
     (_, panelBlock) => panelBlock
@@ -60,4 +60,10 @@ function replaceCustomPanels (input) {
 
     return `<div${style ? ` style="${style}"` : ''}>${content.trim()}</div>`
   })
+}
+
+export const imgToBase64 = async (dataImg, mimeType) => {
+  const arrayBuffer = await dataImg.arrayBuffer()
+  const base64Image = Buffer.from(arrayBuffer).toString('base64')
+  return `data:${mimeType};base64,${base64Image}`
 }
