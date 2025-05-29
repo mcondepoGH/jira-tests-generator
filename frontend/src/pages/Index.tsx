@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import { Sidebar } from "../components/Sidebar.tsx";
 import { JiraTestGenerator } from "../components/JiraTestGenerator.tsx";
 import { SidebarProvider } from "../components/ui/sidebar";

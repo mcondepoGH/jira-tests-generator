@@ -1,5 +1,5 @@
 
-import { Home, Settings, FileText, Bug, TestTube } from "lucide-react";
+import { Home, Settings, FileText, Bug, TestTube, Banana } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import {
   Sidebar as SidebarComponent,
@@ -16,10 +16,7 @@ import {
 
 const menuItems = [
   { title: "Dashboard", url: "/", icon: Home },
-  { title: "Generador", url: "/", icon: TestTube },
-  { title: "Pruebas", url: "/tests", icon: FileText },
-  { title: "Reportes", url: "/reports", icon: Bug },
-  { title: "Configuración", url: "/settings", icon: Settings },
+  { title: "Test 404", url: "/error", icon: Banana },
 ];
 
 export function Sidebar() {

@@ -158,12 +158,12 @@ export function JiraTestGenerator() {
                             </div>
                             <div className="flex space-x-2">
                                 <Button size="sm" variant="outline"
-                                        className="text-white border-white hover:bg-white/20">
+                                        className="bg-gradient-to-r from-blue-500 to-green-600 hover:from-blue-600 hover:to-green-700">
                                     <Copy className="w-4 h-4 mr-1"/>
                                     Copiar
                                 </Button>
                                 <Button size="sm" variant="outline"
-                                        className="text-white border-white hover:bg-white/20">
+                                        className="bg-gradient-to-r from-blue-500 to-green-600 hover:from-blue-600 hover:to-green-700">
                                     <Download className="w-4 h-4 mr-1"/>
                                     Exportar
                                 </Button>

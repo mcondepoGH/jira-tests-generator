@@ -99,3 +99,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+img {
+  padding: 50px;
+  transition: transform .2s; /* Animation */
+  width: 300px;
+  cursor: pointer;
+}
+
+img.zoom-in {
+  margin: 0 auto;
+  transform: scale(5);
+}
