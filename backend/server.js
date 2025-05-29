@@ -1,9 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import fetch from 'node-fetch'
-import { extractDescription } from './jiraContent/contentUtils.js'
-import { getAcceptanceCriteria } from './ai/nautilusAIConnector.js'
+import { extractDescription } from './Jira/content/contentUtils.js'
+import { getAcceptanceCriteria } from './Nautilus/service/aiServices.js'
+import { getJiraIssue } from './Jira/service/jiraServices.js'
 
 dotenv.config()
 
@@ -14,27 +14,14 @@ const PORT = process.env.PORT || 3001
 app.use(cors())
 app.use(express.json())
 
-// Configuración de Jira
-const JIRA_URL = process.env.JIRA_URL
-const JIRA_EMAIL = process.env.JIRA_EMAIL
-const JIRA_TOKEN = process.env.JIRA_TOKEN
-
 // Endpoint para obtener tarea de Jira
 app.get('/api/jira/task/:taskKey', async (req, res) => {
   const { taskKey } = req.params
 
-  console.log(`Fetching task from Jira: ${taskKey}`)
+  console.debug(`Fetching task from Jira: ${taskKey}`)
 
   try {
-    const response = await fetch(`${JIRA_URL}/rest/api/2/issue/${taskKey}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Basic ${Buffer.from(
-          `${JIRA_EMAIL}:${JIRA_TOKEN}`
-        ).toString('base64')}`,
-        'Accept': 'application/json'
-      }
-    })
+    const response = await getJiraIssue(taskKey)
 
     if (!response.ok) {
       throw new Error(`Jira API error: ${response.status} ${response.statusText}`)
@@ -69,5 +56,5 @@ app.get('/api/health', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Backend server running on port ${PORT}`)
+  console.debug(`Backend server running on port ${PORT}`)
 })
