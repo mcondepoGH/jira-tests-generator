@@ -1,5 +1,7 @@
 export const replaceImagesWithEmbedded = (html, fileMap) => {
   return html
+    .replace(/width=([+-]?(?=\.\d|\d)(?:\d+)?\.?\d*)(?:[Ee]([+-]?\d+))?%/g, 'width=50vw')
+    .replace(/height=([+-]?(?=\.\d|\d)(?:\d+)?\.?\d*)(?:[Ee]([+-]?\d+))?%/g, 'height=50vh')
     .replace(/<img\s+([^>]*?)src=["']([^"']+)["']([^>]*)>/g, (_, before, src, after) => {
       const filename = decodeURIComponent(src).split('|')[0].split('?')[0].split('/').pop()
       const dataUri = fileMap.get(filename || '')
