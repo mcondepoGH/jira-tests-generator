@@ -54,8 +54,10 @@ export function TaskCard({ task }: TaskCardProps) {
 			replace: (domNode: any) => {
 				if (domNode.type === 'tag' && styleMap[domNode.name]) {
 					const Tag = domNode.name as keyof React.JSX.IntrinsicElements
+					const attribs = domNode.attribs || ''
+
 					return (
-						<Tag className={styleMap[Tag]}>
+						<Tag {...attribs} className={styleMap[Tag]}>
 							{domToReact(domNode.children, options)}
 						</Tag>
 					)
